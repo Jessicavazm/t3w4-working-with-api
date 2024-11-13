@@ -75,6 +75,7 @@ async function getPokemon(){
 // encounterButton.addEventListener("click", getPokemon);
 
 encounterButton.addEventListener("click", async (event) =>{
+    pokemonContainerDiv.innerText = "";
     console.log("Doing something...");
 
     let pokemonResult = await getPokemon();
