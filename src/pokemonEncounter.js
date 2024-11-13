@@ -4,6 +4,7 @@ console.log("Pokemon Journey begins...");
 const encounterButton = document.getElementById("pokemonEncounterButton");
 const pokemonRenderArea = document.getElementById("encounterPokemonArea");
 const pokemonContainerDiv = document.getElementById("pokemonContainer");
+const encounterGroupButton = document.getElementById("pokemonGroupEncounterButton");
 
 function renderPokemonData(pokemonData) {
     if (!pokemonData.name) {
@@ -12,14 +13,14 @@ function renderPokemonData(pokemonData) {
     // Amended this div to a class to style it with CSS
     pokemonContainerDiv.classList += "pokemonCardEntry";
 
+    let pokemonHeading = document.createElement("h1");
+    pokemonHeading.innerText = pokemonData.name;
+    pokemonContainerDiv.appendChild(pokemonHeading);
+
     // Create the img element and attach the src
     let pokemonImage = document.createElement("img");
     pokemonImage.src = pokemonData.image;
     pokemonContainerDiv.appendChild(pokemonImage);
-
-    let pokemonHeading = document.createElement("h1");
-    pokemonHeading.innerText = pokemonData.name;
-    pokemonContainerDiv.appendChild(pokemonHeading);
 
     let pokemonTypesHeading = document.createElement("h3");
     pokemonTypesHeading.innerText = "Types:",
@@ -81,4 +82,27 @@ encounterButton.addEventListener("click", async (event) =>{
     console.log(pokemonResult);
 
     renderPokemonData(pokemonResult);
+});
+
+encounterGroupButton.addEventListener("click", async () => {
+    pokemonContainerDiv.innerText = "";
+    let multiplePokemonResult = await Promise.all([
+        getPokemon(),
+        getPokemon(),
+        getPokemon(),
+        getPokemon(),
+        getPokemon(),
+        getPokemon(),
+    ]);
+    
+    // Check if the output is as expected
+    console.log(multiplePokemonResult);
+
+    // Run a loop to render the result 
+    multiplePokemonResult.forEach(renderPokemonData);
+
+    // Lengthier version of the above function
+    // multiplePokemonResult.forEach((pokemonResult) => {
+    //     renderPokemonData(pokemonResult);
+    // });
 });
