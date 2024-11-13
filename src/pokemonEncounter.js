@@ -1,6 +1,12 @@
 console.log("Pokemon Journey begins...");
 
+// Fetch the specific ID's
 const encounterButton = document.getElementById("pokemonEncounterButton");
+const pokemonRenderArea = document.getElementById("encounterPokemonArea");
+
+function renderPokemonData(pokemonData) {
+    pokemonRenderArea.innerText = pokemonData.name;
+}
 
 
 async function getPokemon(){
@@ -29,4 +35,6 @@ encounterButton.addEventListener("click", async (event) =>{
     let pokemonResult = await getPokemon();
 
     console.log(pokemonResult);
+
+    renderPokemonData(pokemonResult);
 });
